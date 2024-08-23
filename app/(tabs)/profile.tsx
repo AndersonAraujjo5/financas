@@ -8,7 +8,7 @@ const navbar = Constants.statusBarHeight;
 
 export default function Home() {
     return (
-        <ScrollView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
             <View style={styles.header}>
                 <View>
                     <View style={{
@@ -118,7 +118,7 @@ export default function Home() {
                     marginVertical: 8
                  }}>Transações</Text>
                 <ScrollView style={{
-                    backgroundColor: '#121212',
+                    backgroundColor: 'white',
                     borderRadius: 8
                 }}>
                    <Transation name="Cartão de credito" value="1.293,00" />
@@ -127,7 +127,7 @@ export default function Home() {
                    <Transation name="Pix" value="1.293,00" />
                 </ScrollView>
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

@@ -4,6 +4,7 @@ import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { AntDesign, Feather } from '@expo/vector-icons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -14,7 +15,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
       }}>
-      <Tabs.Screen
+       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
@@ -23,12 +24,33 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="explore"
+       <Tabs.Screen
+        name="dashboard"
         options={{
-          title: 'Explore',
+          title: 'DashBoard',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <Feather name="pie-chart" size={24} color={color}  />
+            // <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="qrcode"
+        options={{
+          title: 'QrCode',
+          tabBarIcon: ({ color, focused }) => (
+            <AntDesign name="qrcode" size={24} color={color}  />
+            // <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Perfil',
+          tabBarIcon: ({ color, focused }) => (
+            <AntDesign name="user" size={24} color={color}  />
+            // <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
           ),
         }}
       />
