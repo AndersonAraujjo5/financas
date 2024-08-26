@@ -1,130 +1,71 @@
-import Card from "@/components/Card";
-import { Pressable, StyleSheet, Text, TextInput, View, ScrollView } from "react-native";
+import { StyleSheet,  Text,  View, ScrollView } from "react-native";
 import Constants from "expo-constants";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { VictoryBar, VictoryChart, VictoryTheme } from "victory-native";
 import { Transation } from "@/components/Transation";
+import { List } from "@/components/List";
+import { AntDesign } from "@expo/vector-icons";
+import FinancialCategories from "@/components/FinancialCategories";
 
 const navbar = Constants.statusBarHeight;
 
 export default function Home() {
+    const sampleData = [
+        // {x: 'jan', y: 100},
+        // {x: 'fev', y:80},
+        // {x: 'mar', y:1002.91},
+        {x: 'abr', y:923.82},
+        {x: 'mai', y: 733.20},
+        {x: 'jun', y: 831.2},
+        {x: 'jul', y:10.12},
+        {x: 'ago', y: 100.93},
+        // {x: 'set', y:493.02},
+        // {x: 'out', y:0},
+        // {x: 'nov', y: 0},
+        // {x: 'dez', y: 0}
+    ]
     return (
         <View style={{ flex: 1 }}>
-            <View style={styles.header}>
-                <View>
-                    <View style={{
-                        width: '100%', height: 38, backgroundColor: 'white', marginTop: navbar,
-                        borderRadius: 8, paddingHorizontal: 4
-                    }}>
-                        <TextInput placeholder="Pesquisa" style={{ width: '100%', height: 38 }} />
-                    </View>
-                </View>
-                <View style={{
-                    marginVertical: 52,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Text style={{ color: "white" }}>
-                        Divida total
-                    </Text>
-                    <Text style={{ color: "white", fontSize: 32, fontWeight: 'bold' }}>
-                        R$ 1.293,00
-                    </Text>
-                    <Pressable style={{
-                        borderWidth: 2,
-                        padding: 8,
-                        borderRadius: 9999,
-                        marginTop: 16,
-                        marginBottom: 24,
-                        borderColor: 'white'
-                    }}>
-                        <Text style={{ color: "white" }}>Add movimentação</Text>
-                    </Pressable>
-                </View>
-            </View>
+           <View style={{
+            backgroundColor: '#304FFF'
+           }}>
+           <VictoryChart
+                theme={VictoryTheme.grayscale}
+                domainPadding={10}
+            >
+                <VictoryBar
+                    style={{ 
+                        data: { fill: "white" },
+                        labels: {fill: 'white'},
+                    }}
+                    data={sampleData}
+                    labels={(item) => `R$${item.x.toFixed(2).replace('.',',')}`}
+                />
+            </VictoryChart>
+           </View>
+            
+            <FinancialCategories />
 
-            <View style={{
-                padding: 12, marginTop: -60
-            }}>
-                <View style={{
-                    backgroundColor: 'white', padding: 32,
-                    borderRadius: 8, display: 'flex',
-                    flexDirection: 'row', justifyContent: 'space-between'
-                }}>
-                    <View>
-                        <View style={{
-                            backgroundColor: "#304FFF", borderRadius: 999, width: 32,
-                            height: 32, justifyContent: "center", alignItems: 'center', marginBottom: 4
-                        }} >
-                            <MaterialIcons name="attach-money" size={24} color="white"
-                            />
-                        </View>
-                        <Text style={{ fontWeight: 'bold' }}>Recebido</Text>
-                    </View>
-                    <View>
-                        <View style={{
-                            backgroundColor: "#304FFF", borderRadius: 999, width: 32,
-                            height: 32, justifyContent: "center", alignItems: 'center', marginBottom: 4
-                        }} >
-                            <MaterialIcons name="attach-money" size={24} color="white"
-                            />
-                        </View>
-                        <Text style={{ fontWeight: 'bold' }}>Enviado</Text>
-                    </View>
-                    <View>
-                        <View style={{
-                            backgroundColor: "#304FFF", borderRadius: 999, width: 32,
-                            height: 32, justifyContent: "center", alignItems: 'center', marginBottom: 4
-                        }} >
-                            <MaterialIcons name="attach-money" size={24} color="white"
-                            />
-                        </View>
-                        <Text style={{ fontWeight: 'bold' }}>Enviado</Text>
-                    </View>
-                    <View>
-                        <View style={{
-                            backgroundColor: "#304FFF", borderRadius: 999, width: 32,
-                            height: 32, justifyContent: "center", alignItems: 'center', marginBottom: 4
-                        }} >
-                            <MaterialIcons name="attach-money" size={24} color="white"
-                            />
-                        </View>
-                        <Text style={{ fontWeight: 'bold' }}>Enviado</Text>
-                    </View>
-                </View>
-
-            </View>
-
-            <View style={styles.container} >
-                <View style={styles.card}>
-                    <View style={{ width: "49%" }}>
-                        <Card
-                            textBody="R$ 290,92"
-                            textHead="Saldo"
-                            textFooter="Mês atual" />
-                    </View>
-                    <View style={{ width: "49%" }}>
-                        <Card
-                            textBody="R$ 1.290,92"
-                            textHead="Fatura"
-                            textFooter="Dezembro" />
-                    </View>
-
-                </View>
-            </View>
-
-            <View style={{ padding: 12 }}>
+           <View style={{ padding: 12 }}>
                 <Text style={{ color: 'white', fontSize: 16,
                     marginVertical: 8
-                 }}>Transações</Text>
+                 }}>Movimentações</Text>
                 <ScrollView style={{
-                    backgroundColor: 'white',
+                    backgroundColor: '#121212',
                     borderRadius: 8
                 }}>
-                   <Transation name="Cartão de credito" value="1.293,00" />
-                   <Transation name="Cartão de debito" value="1.293,00" />
-                   <Transation name="Dinheiro" value="1.293,00" />
-                   <Transation name="Pix" value="1.293,00" />
+                   <List description="Cartão de credito" value="1.293,00" 
+                    icon={() => <AntDesign name="CodeSandbox" size={20} color={'white'} />} 
+                    id={90}/>
+                   <List description="Cartão de debito" value="1.293,00" 
+                    icon={() => <AntDesign name="CodeSandbox" size={20} color={'white'} />} 
+                    id={90}/>
+                   <List description="Dinheiro" value="1.293,00" 
+                    icon={() => <AntDesign name="CodeSandbox" size={20} color={'white'} />} 
+                    id={90}/>
+                   <List description="Pix" value="1.293,00" 
+                   icon={() => <AntDesign name="CodeSandbox" size={20} color={'white'} />} 
+                   id={90} 
+                   />
                 </ScrollView>
             </View>
         </View>
